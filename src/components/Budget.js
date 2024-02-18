@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Budget = () => {
-  const { budget, dispatch } = useContext(AppContext);
+  const { budget, dispatch, currency } = useContext(AppContext);
   const [newBudget, setNewBudget] = useState(budget);
 
   const handleBudgetChange = (event) => {
     if (event.target.value > 20000) {
-      alert("The maximum budget is £20,000");
+      alert(`The maximum budget is ${currency}20,000`);
       return;
     }
     setNewBudget(event.target.value);
