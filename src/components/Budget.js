@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Budget = () => {
@@ -7,14 +7,19 @@ const Budget = () => {
 
   const handleBudgetChange = (event) => {
     setNewBudget(event.target.value);
-  };
-
-  const updateBudget = () => {
     dispatch({
       type: "SET_BUDGET",
       payload: newBudget,
     });
   };
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_BUDGET",
+      payload: newBudget,
+    });
+  }, [newBudget, dispatch]);
+
   return (
     <div className="alert alert-secondary">
       <span>Budget: £</span>
@@ -25,7 +30,6 @@ const Budget = () => {
         value={newBudget}
         onChange={handleBudgetChange}
       ></input>
-      <button onClick={updateBudget}>Update Budget</button>
     </div>
   );
 };
