@@ -6,11 +6,11 @@ const Budget = () => {
   const [newBudget, setNewBudget] = useState(budget);
 
   const handleBudgetChange = (event) => {
+    if (event.target.value > 20000) {
+      alert("The maximum budget is £20,000");
+      return;
+    }
     setNewBudget(event.target.value);
-    dispatch({
-      type: "SET_BUDGET",
-      payload: newBudget,
-    });
   };
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const Budget = () => {
         type="number"
         step="10"
         min="0"
+        max="20000"
         value={newBudget}
         onChange={handleBudgetChange}
       ></input>
